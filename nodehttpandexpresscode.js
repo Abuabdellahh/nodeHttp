@@ -71,6 +71,50 @@
 
 
 
+// const http=require('http')
+
+// const myServer=http.createServer((req,res)=>{
+//     res.write("hello eibrahim")
+//     res.end()
+// })
+
+
+
+// myServer.listen(2222,()=>{
+//     console.log("server is running on port 2222");
+// })
+
+const http=require('http')
+const myServer=http.createServer((req,res)=>{
+    console.log(req.url);
+
+    if(req.url==='/'){
+        res.write("<h1>this is home page</h1>")
+        res.end()
+    }
+    else if(req.url==='/about'){
+        res.write("<h1>this is about page</h1>")
+        res.end()
+    }
+    else if(req.url==='/contact'){
+        res.write("this is contact page")
+        res.end()
+    }
+    else{
+        res.write("404 not found")
+        res.end()
+    }
+    
+})
+
+myServer.listen(2222,()=>{
+    console.log("server is running on port 2222");
+})
+
+
+
+
+
 
 
 
