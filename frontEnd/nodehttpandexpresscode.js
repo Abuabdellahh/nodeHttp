@@ -155,38 +155,43 @@
 
 
 
-const http = require('http');
-const fs = require('fs');
-const mimeTypes=require("mime-types").lookup
+// const http = require('http');
+// const fs = require('fs');
+// const mimeTypes=require("mime-types").lookup
 
-const server = http.createServer((req, res) => {
-    let filePath = req.url;
-    if (req.url === '/') {
-        filePath = '/index.html';
-    }
+// const server = http.createServer((req, res) => {
+//     let filePath = req.url;
+//     if (req.url === '/') {
+//         filePath = '/index.html';
+//     }
 
-    const fR = "../Fruit-Project-Media_Queries/Project" + filePath;
-    const notFoundPath = "./frontEnd/notFound.html"; 
+//     const fR = "../Fruit-Project-Media_Queries/Project" + filePath;
+//     const notFoundPath = "./frontEnd/notFound.html"; 
 
-    fs.readFile(fR, (err, content) => {
-        if (err) {
-            fs.readFile(notFoundPath, (err, notFoundContent) => {
-                res.writeHead(400, { "content-type": mimeTypes(notFoundContent) });
-                res.write(notFoundContent);
-                res.end();
-            });
-        } else {
-            res.writeHead(200, { "content-type": mimeTypes(filePath)});
-            res.write(content);
-            res.end();
-        }
-    });
-});
+//     fs.readFile(fR, (err, content) => {
+//         if (err) {
+//             fs.readFile(notFoundPath, (err, notFoundContent) => {
+//                 res.writeHead(400, { "content-type": mimeTypes(notFoundContent) });
+//                 res.write(notFoundContent);
+//                 res.end();
+//             });
+//         } else {
+//             res.writeHead(200, { "content-type": mimeTypes(filePath)});
+//             res.write(content);
+//             res.end();
+//         }
+//     });
+// });
 
-server.listen(4040, () => {
-    console.log("Server is running on port 4040");
-});
+// server.listen(4040, () => {
+//     console.log("Server is running on port 4040");
+// });
 
+
+
+
+
+//******************* Todo list practice******************** *//
 
 
 
