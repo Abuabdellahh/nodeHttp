@@ -40,17 +40,55 @@
 
 // ****************code************************
 
-const http=require('http')
-const randomNumber=require('./randomNumber')
-const webServer =http.createServer((req,res)=>{
-res.write(`<h1>The generated random number is <strong>${randomNumber.random()}</strong></h1> `)
-res.end()
-})
+// const http=require('http')
+// const randomNumber=require('./randomNumber')
+// const webServer =http.createServer((req,res)=>{
+// res.write(`<h1>The generated random number is <strong>${randomNumber.random()}</strong></h1> `)
+// res.end()
+// })
 
-let Port=1234
-webServer.listen(Port,()=>{
-    console.log(`server is running on port ${Port}`)
-})
+// let Port=1234
+// webServer.listen(Port,()=>{
+//     console.log(`server is running on port ${Port}`)
+// })
+
+
+
+// *****************code*****************
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+http.createServer((req, res) => {
+    if(req.url === '/about') {
+        fs.readFile(path.join(__dirname, 'static', 'apple html css replica', 'about.html'), (err, content) => {
+            if(err) throw err;
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(content);
+        });
+    }
+}).listen(1234, () => console.log('Server running at http://localhost:1234'));
+
+
+http.createServer((req, res) => {
+    let filePath = path.join(__dirname, 'static', req.url === '/' ? 'index.html' : req.url);
+    fs.readFile(filePath, (err, content) => {
+        if(err) {
+            if(err.code == 'ENOENT') {
+                // Handle the error, perhaps serve a 404 page
+            } else {
+                res.writeHead(500);
+                res.end(`Server Error: ${err.code}`);
+            }
+        } else {
+            // Serve the file
+            res.writeHead(200);
+            res.end(content);
+        }
+    });
+}).listen(1234, () => console.log('Server running at http://localhost:1234'));
+
+
 
 
 
